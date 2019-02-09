@@ -27,7 +27,6 @@ class AppController extends AbstractController
     {
         // publish to anyone who's subscribed
         $ip = $request->getClientIp();
-        dump($ip);
         $thruway->publish('com.thruwaydemo.visit', [ ['ip' => $ip ] ]);
 
         return $this->render('app/visit.html.twig', [

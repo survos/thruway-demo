@@ -25,6 +25,23 @@ The app consists of a single web page, which first makes a RPC (Remote Procedure
 
     # now open a web browser http://127.0.0.1:8000/
     
+The web page is now subscribed to topic to receive and display a random number, and also to listen for visitors to the /visit page.  Start the random number publisher:
+
+    bin/console app:publish-random-numbers
+    
+The web page will start displaying the random numbers published by the command line script.  When you open the visitor page, the controller publishes a notification too, simply by injecting the service and publishing.
+
+    // AppController.php
+    /**
+     * @Route("/visit", name="visit")
+     */
+    public function visit(Request $request, ClientManager $thruway)
+    {
+        // publish to anyone who's subscribed
+        $ip = $request->getClientIp();
+        $thruway->publish('com.thruwaydemo.visit', [ ['ip' => $ip ] ]);
+        
+    
 ## Running on heroku
 
 A summary of the commands at https://devcenter.heroku.com/articles/getting-started-with-symfony#deploying-to-heroku
@@ -72,6 +89,8 @@ Now simply pass in the service in the constructor or controller:
     }
     
     
+Because Heroku only allows one free dyno besides the web server, and we're using the free dyno for the thruway processes, we can't run the random number publisher without paying for it.  But we can still monitor the visitor page.
+
 
     
     
