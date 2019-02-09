@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Voryx\ThruwayBundle\Annotation\Register;
+use Voryx\ThruwayBundle\Client\ClientManager;
 
 class AppController extends AbstractController
 {
@@ -15,6 +17,21 @@ class AppController extends AbstractController
     {
         return $this->render('app/index.html.twig', [
             'connectionUrl' => getenv('WAMP_SERVER')
+        ]);
+    }
+
+    /**
+     * @Route("/visit", name="visit")
+     */
+    public function visit(Request $request, ClientManager $thruway)
+    {
+        // publish to anyone who's subscribed
+        $ip = $request->getClientIp();
+        dump($ip);
+        $thruway->publish('com.thruwaydemo.visit', [ ['ip' => $ip ] ]);
+
+        return $this->render('app/visit.html.twig', [
+            // 'connectionUrl' => getenv('WAMP_SERVER')
         ]);
     }
 
@@ -34,5 +51,7 @@ class AppController extends AbstractController
     {
         return random_int($min, $max);
     }
+
+
 
 }

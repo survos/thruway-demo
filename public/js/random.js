@@ -6,10 +6,6 @@ try {
 }
 
 wampServer = $('#connection').data('connectionUrl');
-console.log('connecting to ' + wampServer);
-
-$('#xthruway-log li:first-child').remove();
-
 
 var connection = new autobahn.Connection({url: wampServer, realm: 'realm1'});
 
@@ -30,16 +26,15 @@ connection.onopen = function (session) {
     log('autobahn connection successful!');
 
     // 4) call a remote procedure
-    session.call('com.thruwaydemo.random.description', []).then(
+    let rpc = 'com.thruwaydemo.random.description';
+    session.call(rpc, []).then(
         function (res) {
-            console.log(res);
-            $('#random-number').html(res);
-            log("Result:", res);
+            console.log(res, res.name);
+            log(`RCP '${rpc}' returned "${res.name}"`);
         },
         function (error) {
             console.log("Error:", res);
         },
-
     );
 
 
@@ -55,17 +50,30 @@ connection.onopen = function (session) {
 
     );
 
+    visitorNotification = 'com.thruwaydemo.visit';
+    log("Subscribed to " + visitorNotification);
+    session.subscribe(visitorNotification, function(args) {
+        ip = args[0].ip;
+        log(`Visitor from ${ip}`);
+        // $('#thruway-log').prepend(`<li>${args[0]}</li>`);
+        $('#last-visitor-ip').html(ip);
+    });
+
+
+
     // 1) subscribe to a topic
     function onevent(args) {
         console.log("Event:", args[0]);
     }
-    session.subscribe('com.myapp.hello', onevent);
+    // session.subscribe('com.myapp.hello', onevent);
 
     subscription = 'com.thruwaydemo.randomsubpub';
+    log("Subscribed to " + subscription);
     session.subscribe(subscription, function(args) {
         log(`Received ${args[0]} from ${subscription}`);
         // $('#thruway-log').prepend(`<li>${args[0]}</li>`);
-        console.log(args);
+        let $num = args[0];
+        $('#random-number').html($num);
     });
 
     // 2) publish an event
@@ -79,6 +87,7 @@ connection.onopen = function (session) {
 
 };
 
-console.log('opening autobahn connection ...');
+log('opening autobahn connection  to ' + wampServer);
+
 connection.open();
 

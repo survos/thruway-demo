@@ -14,10 +14,9 @@ use Voryx\ThruwayBundle\Client\ClientManager;
 class PublishRandomNumbersCommand extends Command
 {
 
-    private $thruwayClient;
-
     protected static $defaultName = 'app:publish-random-numbers';
 
+    private $thruwayClient;
     public function __construct(ClientManager $thruwayClient, $name = null)
     {
         parent::__construct($name);
