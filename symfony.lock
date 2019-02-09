@@ -1,4 +1,7 @@
 {
+    "cboden/ratchet": {
+        "version": "v0.4.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -77,11 +80,17 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
     "fig/link-util": {
         "version": "1.0.0"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -110,6 +119,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -118,6 +130,39 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
+    },
+    "ratchet/pawl": {
+        "version": "v0.3.4"
+    },
+    "ratchet/rfc6455": {
+        "version": "0.2.4"
+    },
+    "react/cache": {
+        "version": "v0.5.0"
+    },
+    "react/child-process": {
+        "version": "v0.6.0"
+    },
+    "react/dns": {
+        "version": "v0.4.16"
+    },
+    "react/event-loop": {
+        "version": "v1.1.0"
+    },
+    "react/promise": {
+        "version": "v2.7.1"
+    },
+    "react/promise-timer": {
+        "version": "v1.5.0"
+    },
+    "react/socket": {
+        "version": "v1.2.0"
+    },
+    "react/stream": {
+        "version": "v1.1.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -401,8 +446,26 @@
     "symfony/yaml": {
         "version": "v4.2.3"
     },
+    "thruway/client": {
+        "version": "0.5.4"
+    },
+    "thruway/pawl-transport": {
+        "version": "0.5.0"
+    },
+    "thruway/ratchet-transport": {
+        "version": "0.5.0"
+    },
     "twig/twig": {
         "version": "v2.6.2"
+    },
+    "voryx/thruway": {
+        "version": "0.5.3"
+    },
+    "voryx/thruway-bundle": {
+        "version": "0.4.1"
+    },
+    "voryx/thruway-common": {
+        "version": "1.0.5"
     },
     "webmozart/assert": {
         "version": "1.4.0"
