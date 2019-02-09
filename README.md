@@ -9,7 +9,7 @@ The app consists of a single web page, which first makes a RPC (Remote Procedure
 
 ## Running locally
 
-    git@github.com:survos/thruway-demo.git
+    git clone git@github.com:survos/thruway-demo.git
     cd thruway-demo
     composer install
     
@@ -91,7 +91,7 @@ Now simply pass in the service in the constructor or controller:
     
 Because Heroku only allows one free dyno besides the web server, and we're using the free dyno for the thruway processes, we can't run the random number publisher without paying for it.  But we can still monitor the visitor page.
 
-
+However, we can run the random number publisher from another server, even locally, as long as we connect to the same thruway router.  
     
     
     
