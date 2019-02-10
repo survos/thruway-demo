@@ -51,6 +51,25 @@ class PublishRandomNumbersCommand extends Command
         $topic = $input->getArgument('topic');
         $sleepTime = $input->getOption('sleep');
 
+        $io->note("Connecting to " . getenv('WAMP_SERVER'));
+
+        $infoTopic  = 'com.thruwaydemo.random.description';
+        $this->thruwayClient->call($infoTopic, [])->then(
+            function ($res) use ($io) {
+                // dump($res, $res[0]);
+                $info = $res[0];
+                dump('info', $info, 'name', $info->name);
+                print $info->name;
+                // print "Received " + (string)$info->name;
+                // $io->success("Received " + (string)$info->name);
+                // publish the random number
+            }
+        )->done(function ($res) {
+            // die("Done");
+            // dump($res);
+        });
+
+
         $io->note(sprintf('Publishing Random Numbers to %s', $topic));
 
         // make an RPC call, just to show how to do it.
